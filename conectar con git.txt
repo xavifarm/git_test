@@ -1,0 +1,72 @@
+CONFIGURAR ACTUALIZACIÓN DE REPOSITORIOS EN GITHUB DE NUESTRO SERVIDOR en local
+*******************************************************************************
+1.- EN PRIMER LUGAR VAMOS A LA CONSOLA Y ACCEDEDMOS A LA CARPETA DEL SERVIDOR PERO SIN ACCEDER A VAGRANT SSH ( SOLO EN GIT BASH )
+2.- CONFIGURAR EL NOMBRE DE USUARIO (INTRODUCIMOS ESTE COMANDO EN TERMINAL)
+        $ git config --global user.name "xavifm"
+
+3.- CONFIGURAR EL EMAIL DE USUARIO (INTRODUCIMOS ESTE COMANDO EN TERMINAL)
+        $ git config --global user.email "xavifarmarti@hotmail.com"
+
+4.- CREAMOS UNA CARPETA PARA INTRODUCIR LOS REPOSITORIOS
+        $ mkdir git-test
+
+5.- ACCEDEMOS A LA NUEVA CARPETA
+        $ cd git-test
+
+6.- UNA VEZ DENTRO DE ESTA CARPETA CON EL SIGUIENTE COMANDO VAMOS A CREAR LOS ARCHIVOS PARA CONECTAR CON GIT
+        $ git init 
+            FLUJO DE TRABAJO DE GIT
+            1. creamos un archivo/archivos (sin seguimiento) ($ echo "Hola Mundo desde Git" >> README.txt)
+            2. ponemos los archivos en el area STAGE ( le damos seguimiento ) ($ git add --all)
+            3. hacemos un Commit(registro en la base de datos de los cambios) ($ git commit -m "Creado archivo README.txt" )
+
+            Si despues de esto se quiere subir a un servidor remoto haremos:
+                4. hacemos Push
+
+7.- EJEMPLOS:---------------------------------------------------------------------------------
+A continuación vamos a crear un archivo:
+$ echo "Hola Mundo desde Git" >> README.txt
+CON ls VEREMOS QUE SE HA CREADO "README.txt" con el contenido introducido en el echo anterior
+$ git status - veremos el nuevo archivo en raiz
+
+PARA DAR TRACKING A TODOS LOS DIRECTORIOS Y ARCHIVOS
+$ git add --all
+NUEVAMENTE MANDAMOS $ git status PARA VER LOS CAMBIOS
+Y A CONTINUACION LO SACAMOS DEL STAGE
+$ git commit -m "Creado archivo README.txt"
+
+CREAR UN NUEVO ARCHIVOS Y HACEMOS TODO EL PROCESO DE NUEVO
+$ touch lisense
+$ git add --all
+$ git commit -m "creado el archivo lisense"
+
+AHORA PODEMOS VER TODOS LOS ARCHIVOS CREADOS
+$ git log
+PARA VER LOS CAMBIOS UTILIZAREMOS
+$ git diff
+
+-----------------------------------------------------------------
+AHORA VAMOS A CREAR SERVIDOR REMOTO PARA PODER SUBIR LOS CAMBIOS
+-----------------------------------------------------------------
+1. COMPROBAR SI TENEMOS ALGUNA CLAVE id_rsa CREADA
+        $ ls -al ~/.ssh
+2. PARA GENERAR UNA NUEVA CLAVE RSA
+        $ ssh-keygen -t rsa -b 4096 -C "xavifarmarti@hotmail.com"
+3. PARA NO TENER QUE METER LA CLAVE CONTINUAMENTE
+        $ eval $(ssh-agent -s)
+4. PARA NO TENER QUE INTRODUCIR EL NOMBRE CONTINUAMENTE
+        $ ssh-add ~/.ssh/id_rsa
+5. PARA VER EL CONTENIDO DE LA CLAVE PUBLICA - SE COPIA EL CONTENIDO QUE NOS HA MOSTRADO
+        $ cat ~/.ssh/id_rsa.pub
+6. VAMOS A LA PÁGINA GITHUB Y ACCEDIENDO A SETTINGS DE NUESTRA CUENTA
+SELECCIONAREMOS AGREGAR UNA NUEVA KEY Y PEGAREMOS EL TEXTO COPIADO ANTERIORMENTE 
+Y GUARDAREMOS LOS CAMBIOS
+7. PARA PROBAR LA CONEXIÓN ESTÁ FUNCIONANDO BIEN INCLUIMOS EL SIGUIENTE COMANDO EN EL TERMINAL
+        $ ssh -T git@github.com
+    DONDE NOS DEBERÁ RESPONDER CON LA BIENVENIDA
+8. PARA SUBIR EL NUEVO REPOSITORIO INTRODUCIMOS EL SIGUIENTE COMANDO QUE RECOGEMOS DE NUESTRO REPOSITORIO
+        $ git remote add origin https://github.com/xavifarm/git_test.git
+9. AHORA DEBEREMOS BORRAR EL GIT ORIGINAL
+        $ git remote remove origin
+10. SI AHORA VAMOS A LA PESTAÑA DE SSH SUPERIOR Y COPIAMOS EL COMANDO QUE APARECE Y LO PEGAREMOS EN EL TERMINAL NUEVAMENTE
+        $ git remote add origin git@github.com:xavifarm/git_test.git
