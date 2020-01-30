@@ -22,6 +22,7 @@ CONFIGURAR ACTUALIZACIÓN DE REPOSITORIOS EN GITHUB DE NUESTRO SERVIDOR en local
 
             Si despues de esto se quiere subir a un servidor remoto haremos:
                 4. hacemos Push
+                        $ git push (para enviar todos los archivos que ya han sido registrados)
 
 7.- EJEMPLOS:---------------------------------------------------------------------------------
 A continuación vamos a crear un archivo:
@@ -70,3 +71,12 @@ Y GUARDAREMOS LOS CAMBIOS
         $ git remote remove origin
 10. SI AHORA VAMOS A LA PESTAÑA DE SSH SUPERIOR Y COPIAMOS EL COMANDO QUE APARECE Y LO PEGAREMOS EN EL TERMINAL NUEVAMENTE
         $ git remote add origin git@github.com:xavifarm/git_test.git
+
+***                       ***                   ***             ***             ***             ***             ***
+SI POR ERROR SE BORRA ALGUN ARCHIVO O ALGUNA INFORMACION QUE DESEAMOS RECUPERAR ACUDIREMOS A LA PÁGINA DE GITHUB Y EN 
+NUESTRO REPOSITORIO CLICAMOS EN LA PESTAÑA DE CLONE OR DOWNLOAD Y COPIAREMOS EL COMANDO QUE APARECE
+        A CONTINUACIÓN DEBEREMOS BORRAR NUESTRO REPOSITORIO EN EL TERMINAL
+                $ rm -R (git-test) 
+        Y DESPUÉS INTRODUCIREMOS EL COMANDO COPIADO
+                $ git clone ( pegamos la ruta de github - git@github.com:xavifarm/git_test.git )
+***                       ***                   ***             ***             ***             ***             ***
